@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp QR Code</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const socket = io();
+
+            socket.on('qrCodeEvent', (base64Screenshot) => {
+                console.log('image',base64Screenshot);
+                const qrCodeImage = document.getElementById('qrCodeImage');
+                qrCodeImage.src = `data:image/png;base64,${base64Screenshot}`;
+            });
+        });
+    </script>
+</head>
+
+<style>
+    .centre{
+        display: flex;
+        justify-content: center;
+    }
+    .sethw{
+        height: 264px;
+        width: 264px;
+    }
+ </style>
+<body>
+    <h1>WhatsApp QR Code</h1>
+    <img id="qrCodeImage" src="" alt="WhatsApp QR Code" class="sethw">
+</body>
+</html>
