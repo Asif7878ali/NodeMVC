@@ -1,13 +1,15 @@
-const express = require('express');
-const router = express.Router();
-const whatsappController = require('../Controller/whatsappController.js');
-const easypayController = require('../Controller/easypayController.js')
+const {Router} = require('express');
+const generateQRCode = require('../Controller/whatsappController.js');
+const easypay = require('../Controller/easypayController.js');
+const automateNumber = require('../Controller/whataNumController.js');
 
-router.get('/', (req, res) => {
+const router = Router();
+
+router.route('/').get((req , res) =>{
     res.render('home');
-});
-
-router.get('/automate/whatsapp', whatsappController.getQRCode);
-router.get('/automate/easypay', easypayController.easyPay);
+})
+router.route('/automate/whatsapp').get(generateQRCode);
+router.route('/automate/whatapp/number').get(automateNumber);
+router.route('/automate/easypay').get(easypay);
 
 module.exports = router;

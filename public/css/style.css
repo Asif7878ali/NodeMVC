@@ -1,0 +1,8 @@
+.centre{
+    display: flex;
+    justify-content: center;
+}
+.sethw{
+    height: 264px;
+    width: 264px;
+}

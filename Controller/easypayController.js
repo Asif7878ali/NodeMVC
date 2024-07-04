@@ -2,7 +2,7 @@ const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const puppeteerExtra = require('puppeteer-extra');
 puppeteerExtra.use(StealthPlugin());
 
-exports.easyPay = async (req, res) => {
+const easyPay = async (req, res) => {
     try {
         const browserLaunch = await puppeteerExtra.launch({ headless: false });
         const page = await browserLaunch.newPage();
@@ -29,3 +29,5 @@ exports.easyPay = async (req, res) => {
          throw error;
    }
 };
+
+module.exports = easyPay;

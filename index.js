@@ -1,6 +1,7 @@
 const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
+const path = require('path');
 
 const app = express();
 const server = http.createServer(app);
@@ -12,7 +13,9 @@ const getRoute = require('./Routes/getroute.js');
 
 // Set view engine
 app.set('view engine','ejs');
-app.set('views','./views');
+app.set('views', path.join(__dirname,'views'));
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 //Route
 app.use('/', getRoute);
@@ -23,9 +26,9 @@ io.on('connection', (socket) =>{
         console.log('User Disconnected');
     });
 })
-// Make io instance available to routes
-app.set('socketio', io);
 
 server.listen(port , () => {
     console.log(`Server is running on port ${port}`);
 })
+
+module.exports = io;
